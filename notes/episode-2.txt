@@ -107,5 +107,11 @@ We can specify which browsers we want to support by adding a key "browserslist" 
   It will make sure that our app runs on last 2 versions of any browser out there
 
 We can see how the language of defining the browserslist should be in the official browserslist docs and browserslist.dev
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. 'npx parcel build index.html' will fail and throw this error:
+  @parcel/namer-default: Target "main" declares an output file path of "App.js" which does not match the compiled bundle type "html".
+  This is because during 'npm init', npm added "main": "App.js" to package.json which doesn't match what we are specifying as the input to parcel(index.html)
+  Read more on this
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 1. BE CURIOUS ABOUT EVERY DAMN THING
