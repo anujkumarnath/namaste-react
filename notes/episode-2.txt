@@ -102,3 +102,5 @@ We can specify which browsers we want to support by adding a key "browserslist" 
   It will make sure that our app runs on last 2 versions of any browser out there
 
 We can see how the language of defining the browserslist should be in the official browserslist docs and browserslist.dev
+---------------------------------------------------------------------------------------------------------------------------------------------
+1. BE CURIOUS ABOUT EVERY DAMN THING
