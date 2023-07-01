@@ -50,3 +50,42 @@
 12. Every dependency has it's own package.json
 13. 2-12 may be asked in interviews, read more about them
 14. Whatever you can reacreate do not put into git
+--------------------------------------------------------------------------------
+1. npx means executing package. It allows running Node.js packages without the need to 
+  install them globally or locally in our project. It allows us to run packages directly
+  from the npm registry without polluting our global or local package space.
+
+2. Using CDN is not a preferred way to include react into a project. Why?
+-> It will cause network call to the CDN for the files:
+  (a) If we have everything built into the single bundle file, we don't have to make another request
+  (b) If the version of react has to be changed, we would need to change the url in the script tag
+  (c) It's easier to manage react if we put it inside node_modules as a package
+--------------------------------------------------------------------------------------------
+1. If we have react and react-dom installed as a package as and use it, we don't need to use CDN links any more.
+2. We would use import statements in our files where React and ReactDOM is required
+  Now the browser will show an error that import statements cannot be used in browsers.
+  This is because native browser scripts doesn't support import statement.
+3. We can resolve this by telling the browser that it's not just a browser javascript, it's an ES6 module.
+4. We can do that by specifying type="module" in the script tag:
+    <script type="module" src="./App.js"></script>
+-------------------------------------------------------------------------------------------------------------------
+1. How do we get our application running with the changes we made?
+-> We will run the command 'npx parcel index.html' index.html is the entry-point of our project.
+2. By doing so, parcel does the following things:
+    (a) It creates a dev build of our project
+    (b) Creates a local dev server for us to host the files
+    (c) It does HMR - Hot Module Replacement - we see the changes as soon as we make any changes to the files
+      and the browser automatically refreshes.(I still have doubt if parcel is doing HMR)
+    (d) It does that by using a file watching algorithm written in C++
+    (e) Subsequent changes made in files create lesser time to reflect because parcel also uses caching
+    (f) It maintains its chache inside .parcel-cache folder in the root of the project
+    (g) Parcel also does image optimization - the most expensive operation for a browser to do is to pull and render and image into the DOM
+    (h) Parcel also does Bundling, minification (removing white spaces, compressing)
+    (i) https
+    (j) Tree Shaking - removed unused code
+    (k) Diffrential bundling and transpiling
+    (k) Read documentation of parcel (one of the best documentation)
+--------------------------------------------------------------------------------------------------------------------------------------------
+1. It is not only react that makes your application fast, it's also the bundler and the optimization, minification and bundling it does to your code
+2. We can recreate node_modules, .parcel-cache and dist folder by running the same scripts in the production server, so we are not pushing these to git
+3. The dev server offered by parcel serves the file from the 'dist' directory and not the actual files we have written
