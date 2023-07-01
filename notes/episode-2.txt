@@ -1,6 +1,6 @@
 1. package.json is configuration file for npm
 
-2. Our code needs to minified, optimized, compressed and cleaned before we can push it to production.
+2. Our code needs to be minified, optimized, compressed and cleaned up before we can push it to production.
   For this we need some tool to do the same for us. Such a tool is called a bundler
   example: webpack, parcel, vite
   
@@ -8,35 +8,37 @@
   
 3. There are two types of dependencies: normal and dev  
   dev dependencies    : used during development ONLY
-  normal dependencies : used in production also
+  normal dependencies : used in dev as well as in production
 
-4. The caret at the beginning of the dependency version '^2.8.3' specifies that
-  the dependency will automatically update to the latest minor version, like 2.9.4 
+4. The caret(^) at the beginning of the dependency version '^2.8.3' specifies that
+  the dependency will automatically(with npm install command) update to the latest minor version, like 2.9.4 
 
-5. The telda at the beginning of the dependency version '~2.9.3' specifies that
+5. The telda(~) at the beginning of the dependency version '~2.9.3' specifies that
   the dependency will automatically update to the latest minor version, like 3.0.1
 
-6. It's safe to automatically upgradre to minor version upgradre
+6. It's safe to automatically upgrade to latest minor version
   but automatically upgrading to major verson may bring breaking changes
 
 7. Different between package.json and package-lock.json:
 
   package.json:
-    (a) It's a configuration file for npm. It keeps tracks of
+    (a) It's a configuration file for npm. It keeps tracks of the
         packages we install in our project and their APPROXIMATE version - ~2.8.0 or ^2.8.0
 
-    (b) If I upgrade my dependency version from 2.8.0 to 2.9.0 (assuming it's specified with ^2.8.0/~2.8.0), package.json will not change
+    (b) If I upgrade my dependency version from 2.8.0 to 2.9.0(by using npm install)(assuming it's specified with ^2.8.0/~2.8.0), package.json will not change
 
   package-lock.json:
-    (a) It keeps track of the EXACT version of the dependency - if it's 2.9.0, it will keep record as 2.9.0 
+    (a) It keeps track of the EXACT version of the dependency - if it's 2.9.0, it will keep record as 2.9.0
+        It will keep updating the version if there is some automatic upgrade
         It kind of locks the version and keeps the record of it.
     (b) In addition to that package-lock.json also keeps track of transitive dependencies
 
 8. What is the 'integrity' field inside a dependency in package-lock.json?
 -> It's a SHA512 hash of the package to verify if what is in the local environment is exactly replicated on production
+    Study more on this
 
 9. node_modules is the directory where all the node packages we download are stored.
-  It's the actual local repository all the packages we download. In simple words, it's a collection of dependencies.
+  It's the actual local repository for all the packages we download. In simple words, it's a collection of dependencies.
 
 10. What is transitive dependency?
 -> When we install a dependency like parcel in our project, it may have it's own dependencies,
@@ -49,22 +51,25 @@
 
 12. Every dependency has it's own package.json
 13. 2-12 may be asked in interviews, read more about them
-14. Whatever you can reacreate do not put into git
---------------------------------------------------------------------------------
-1. npx means executing package. It allows running Node.js packages without the need to 
+14. Whatever you can recreate do not put into git like node_modules
+-------------------------------------------------------------------------------------------------------------------
+1. npx command is used to execute packages. It allows running Node.js packages without the need to 
   install them globally or locally in our project. It allows us to run packages directly
   from the npm registry without polluting our global or local package space.
+  Read more on this.
 
 2. Using CDN is not a preferred way to include react into a project. Why?
 -> It will cause network call to the CDN for the files:
   (a) If we have everything built into the single bundle file, we don't have to make another request
   (b) If the version of react has to be changed, we would need to change the url in the script tag
-  (c) It's easier to manage react if we put it inside node_modules as a package
---------------------------------------------------------------------------------------------
-1. If we have react and react-dom installed as a package as and use it, we don't need to use CDN links any more.
+  (c) It's easier to manage react if we put it inside node_modules as a package. Read and find why
+-------------------------------------------------------------------------------------------------------------------
+1. If we have react and react-dom installed as a package and we use it, we don't need to use CDN links any more.
 2. We would use import statements in our files where React and ReactDOM is required
-  Now the browser will show an error that import statements cannot be used in browsers.
-  This is because native browser scripts doesn't support import statement.
+    
+    Now the browser will show an error that import statements cannot be used in browsers.
+    This is because native browser scripts don't support import statement.
+
 3. We can resolve this by telling the browser that it's not just a browser javascript, it's an ES6 module.
 4. We can do that by specifying type="module" in the script tag:
     <script type="module" src="./App.js"></script>
@@ -73,23 +78,23 @@
 -> We will run the command 'npx parcel index.html' index.html is the entry-point of our project.
 2. By doing so, parcel does the following things:
     (a) It creates a dev build of our project
-    (b) Creates a local dev server for us to host the files
+    (b) Creates a local dev server for us to host the files(that it puts in dist folder)
     (c) It does HMR - Hot Module Replacement - we see the changes as soon as we make any changes to the files
       and the browser automatically refreshes.(I still have doubt if parcel is doing HMR)
     (d) It does that by using a file watching algorithm written in C++
     (e) Subsequent changes made in files create lesser time to reflect because parcel also uses caching
-    (f) It maintains its chache inside .parcel-cache folder in the root of the project
+    (f) It maintains its chache inside '.parcel-cache' folder in the root of the project
     (g) Parcel also does image optimization - the most expensive operation for a browser to do is to pull and render and image into the DOM
-    (h) Parcel also does Bundling, minification (removing white spaces, compressing)
+    (h) Parcel also does Bundling, minification (removing white spaces, renaming and shortening variable and function names wherever possible)
     (i) https
     (j) Tree Shaking - removed unused code
     (k) Diffrential bundling and transpiling
     (k) Read documentation of parcel (one of the best documentation)
---------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 1. It is not only react that makes your application fast, it's also the bundler and the optimization, minification and bundling it does to your code
 2. We can recreate node_modules, .parcel-cache and dist folder by running the same scripts in the production server, so we are not pushing these to git
 3. The dev server offered by parcel serves the file from the 'dist' directory and not the actual files we have written
---------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 1. How to specify which browsers should your app be working on at-least?
 -> Parcel uses browserslist npm package to do that
   (a) The more browsers we add, our codebase will be bigger to include code to add support for all these browsers.
@@ -102,5 +107,5 @@ We can specify which browsers we want to support by adding a key "browserslist" 
   It will make sure that our app runs on last 2 versions of any browser out there
 
 We can see how the language of defining the browserslist should be in the official browserslist docs and browserslist.dev
----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 1. BE CURIOUS ABOUT EVERY DAMN THING
