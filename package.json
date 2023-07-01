@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/anujkumarnath/namaste-react/issues"
   },
-  "homepage": "https://github.com/anujkumarnath/namaste-react#readme"
+  "homepage": "https://github.com/anujkumarnath/namaste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
 }

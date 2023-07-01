@@ -1,1 +1,5 @@
+#Ignore files with the name only
 .vscode
+
+#Ignore folders and it's content using a '/' after the name
+node_modules/

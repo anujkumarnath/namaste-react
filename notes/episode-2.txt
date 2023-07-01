@@ -1,0 +1,52 @@
+1. package.json is configuration file for npm
+
+2. Our code needs to minified, optimized, compressed and cleaned before we can push it to production.
+  For this we need some tool to do the same for us. Such a tool is called a bundler
+  example: webpack, parcel, vite
+  
+  We will be using parcel: npm install -D parcel
+  
+3. There are two types of dependencies: normal and dev  
+  dev dependencies    : used during development ONLY
+  normal dependencies : used in production also
+
+4. The caret at the beginning of the dependency version '^2.8.3' specifies that
+  the dependency will automatically update to the latest minor version, like 2.9.4 
+
+5. The telda at the beginning of the dependency version '~2.9.3' specifies that
+  the dependency will automatically update to the latest minor version, like 3.0.1
+
+6. It's safe to automatically upgradre to minor version upgradre
+  but automatically upgrading to major verson may bring breaking changes
+
+7. Different between package.json and package-lock.json:
+
+  package.json:
+    (a) It's a configuration file for npm. It keeps tracks of
+        packages we install in our project and their APPROXIMATE version - ~2.8.0 or ^2.8.0
+
+    (b) If I upgrade my dependency version from 2.8.0 to 2.9.0 (assuming it's specified with ^2.8.0/~2.8.0), package.json will not change
+
+  package-lock.json:
+    (a) It keeps track of the EXACT version of the dependency - if it's 2.9.0, it will keep record as 2.9.0 
+        It kind of locks the version and keeps the record of it.
+    (b) In addition to that package-lock.json also keeps track of transitive dependencies
+
+8. What is the 'integrity' field inside a dependency in package-lock.json?
+-> It's a SHA512 hash of the package to verify if what is in the local environment is exactly replicated on production
+
+9. node_modules is the directory where all the node packages we download are stored.
+  It's the actual local repository all the packages we download. In simple words, it's a collection of dependencies.
+
+10. What is transitive dependency?
+-> When we install a dependency like parcel in our project, it may have it's own dependencies,
+  and those dependencies may haave their own dependencies and so on.
+
+  The idea of such a chain of dependencies is called 'transitive dependency'
+
+11. Because of transitive dependencies, node_modules may contain packages that we may not have explicitly specified to install.
+  e.g., installing parcel will end-up downloading other packages like babel and all
+
+12. Every dependency has it's own package.json
+13. 2-12 may be asked in interviews, read more about them
+14. Whatever you can reacreate do not put into git
