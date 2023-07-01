@@ -1,16 +1,34 @@
-// 1. creating the React element for h1
-// 2. passing attributes to the h1 tag
-// 3. specifying children of the h1 tag
-// 4. 2 and 3 combined - we are passing props to the heading React element:
-// props: { id: 'heading', xyz: 'abc', children: 'Hello World from React!' }
-const heading = React.createElement("h1", { id: "heading", xyz: "abc" }, "Hello World from React!");
+// We want to create the following nested HTML structure using react:
+// <div id="parent">
+//   <div id="child">
+//     <h1>I am h1 tag</h1>
+//   </div>
+// </div>
 
-console.log(heading); // returns an js object representing the heading react element
 
-// defining the root element(in the HTML DOM) for react to operate on
+// created the root for react to add children to
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// adding the created HTML element to the root
-// it takes the heading object, creates the h1 element that browser understands and put this into
-// the root we have specified in line 11
-root.render(heading);
+// creating the react element corresponding to parent div tag 
+const parent = React.createElement(
+  "div",
+  { id: "parent" },
+  // creating the react element corresponding to child div tag
+  React.createElement(
+    "div",
+    { id: "child" },
+    // creating the react element corresponding to h1 tag 
+    React.createElement(
+      "h1",
+      {},
+      "I am h1 tag"
+    )
+  )
+);
+
+// logging the parent react element to see what's inside
+console.log(parent);
+
+// telling react to generate the structure that browser understands and
+// to put the html structure to the DOM node specified the root react element (DOM node with id="root")
+root.render(parent);
