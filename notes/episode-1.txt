@@ -1,45 +1,58 @@
 1. Take notes
 2. Pause and try to redo what he does
 3. Maintain a github repo
---------------------------------------------------
+-----------------------------------------------------------------------------
 1. We can use JS to push an element to the dom.
 2. We can use cdn links to include react in our project
-3. including the two scripts give us react in the browser
+3. including the two scripts(React and ReactDOM) give us react in the browser
 4. We can write React in the console and see it's there
 5. Why there are two files?
--> The first file is the core of react and the second one is to manipulate the DOM.
-React runs of multiple platforms or devices. For mobile, we have react native where the core react is the same but the second file is different. Similarly there are other options available for the second script for different usecases, but the core remains the same
+-> The first file(React) is the core of react and the second(ReactDOM) one is to manipulate the DOM.
+	React runs on multiple platforms or devices. For mobile, we have react native where the core react is the same but the second file is different.
+	But there are other options available for the second script for different use cases, but the core remains the same.
+
 6. We can also use the second file by typing ReactDOM on the console
 7. Why is crossorigin is specified in the script tag?
--> The servers serving the HTML file and the react files are different, so by trying to access the react files (resources) in our HTML file, we are doing a cross-origin request to the CDN server. Browsers stop such request by default for security reasons, we have to use the keyword crossorigin to specify the browser that we trust the remote site and to allow crossorigin request.
----------------------------------------------------------------------------------------------
+-> The servers serving the HTML file and the react files are different, so by trying to access the react files (resources) in our HTML file,
+	we are doing a cross-origin request to the CDN server. Browsers stop such request by default for security reasons.
+	We have to use the keyword crossorigin to specify the browser that we trust the remote server and to allow crossorigin request.
+--------------------------------------------------------------------------------------------------------------------------------------------------
 1. React needs a root where we can put elements
 2. We create elements using React.createElement("html tag", {}, "The content that goes into the tag");
 	e.g., React.createElement("h1", {}, "Hello World from React!");
 
-{} - is the place where we give attiributes to our tags like if we need to add some id to the h1 tag, we will write:
-	React.createElement("h1", { id: "heading" }, "Hello World from React!");
-We can give other attirbute like xyz:
-	React.createElement("h1", { xyz: "abc" }, "Hello from React!");
+	{} is the place where we give attiributes to our tags like if we need to add some id to the h1 tag, we will write:
+		React.createElement("h1", { id: "heading" }, "Hello World from React!");
+	We can give other attirbute like xyz:
+		React.createElement("h1", { xyz: "abc" }, "Hello from React!");
 
-3. Creating an element is the core job of react, so we use 'React' but creating the root and adding items to it is the part of dom manipulation, so we use 'ReactDOM'
----------------------------------------------------------------------------------------------
-1. Most resource intensive task for a browser to do is to manipulate DOM - putting some element inside dom, removing or updating them.
-2. All frontend libraries like React are trying to optimize this operation and reduce the costly operations performed by the browser
-3. React has the philosophy that whatever you do in a web page, do it using JavaScript and so it provides helper functions to do so in a very performant way
-4. Till this point whatever HTML we have written is all that we need. From now on any operation we will do, like adding and HTML element, we will use React/JavaScript
----------------------------------------------------------------------------------------------
-1. what does React.createElement() returns?
--> Not an HTML element, it's an js object
-const heading = React.createElement("h1", { id: "heading", xyz: "abc" }, "Hello from React!");
-heading is an object that contains many fields like type, props, ref etc.
-	a. The first arugment to the React.createElement is the type
-	b. The second and thrid arguments become the part of the prop:
-		prop: { id: 'heading", xyz: 'abc', children: 'Hello from React!'}
-	Therefore, the prop is all the attributes passed to the element and the thing(3rd param) that goes inside the element, called children
+3. Creating an element is the core job of react, so we use 'React' but creating the root
+	but adding items to it is the part of dom manipulation, so we use 'ReactDOM'
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. The most resource intensive task for a browser to do is to manipulate DOM - putting some element inside dom, removing or updating them.
+2. All frontend libraries like React are trying to optimize this operation and reduce the costly operations performed by the browser.
+3. React has the philosophy that whatever you do in a web page, do it using JavaScript and so it provides helper functions to do so in a very performant way.
+4. Till this point whatever HTML we have written is all that we need.
+	From now on any operation we will do, like adding and HTML element, we will use React/JavaScript
+---------------------------------------------------------------------------------------------------
+1. what does React.createElement() return?
+-> Not an HTML element, it's a js object
+
+	const heading = React.createElement("h1", { id: "heading", xyz: "abc" }, "Hello from React!");
+
+	heading is an object that contains many fields like type, props, ref etc.
+		a. The first arugment to the React.createElement is the 'type'
+		b. The second and thrid arguments become the part of the 'prop':
+			prop: { id: 'heading", xyz: 'abc', children: 'Hello from React!'}
+
+			Therefore, the prop is all the attributes passed to the element and the thing(3rd param) that goes inside the element, called "children"
+
 2. what does root.render(heading) do?
--> The job of the root.render() function is to take the js object we just created, create the h1 tag that the browser understands and put that element inside the root - the root element we specified with the ReactDOM.createRoot() call
----------------------------------------------------------------------------------------------
+-> The job of the root.render() function is:
+		(a) to take the js object we just created,
+		(b) create the h1 tag that the browser understands and
+		(c) put that element inside the root - the root element we specified with the ReactDOM.createRoot() call
+-----------------------------------------------------------------------------------------------------------------------------------------------
 1. How do we create a nested html structure with react like the following:
 	<div id="parent">
 		<div id="child">
@@ -49,131 +62,132 @@ heading is an object that contains many fields like type, props, ref etc.
 
 ->
 	(a) we first do something like this:
-	const parent = React.createElement(
-		"div",
-		{ id: "parent" },
-		(b) now we realize that we need to pass the react element corresponding to the div with id "child"
-	);
+		const parent = React.createElement(
+			"div",
+			{ id: "parent" },
+			(b) now we realize that we need to pass the react element corresponding to the div with id "child"
+		);
 
 	(c) now we create and pass the children similarly:
-	const parent = React.createElement(
-		"div",
-		{ id: "parent" },
-		React.createElement(
+		const parent = React.createElement(
 			"div",
-			{ id: "child" },
-			(d) now we realize that we need to pass the react element corresponding to the h1 tag with text "I am h1 tag"
-		)
-	);
+			{ id: "parent" },
+			React.createElement(
+				"div",
+				{ id: "child" },
+				(d) now we realize that we need to pass the react element corresponding to the h1 tag with text "I am h1 tag"
+			)
+		);
 
 	(d) now we create and pass the react element similarly:
-	const parent = React.createElement(
-		"div",
-		{ id: "parent" },
-		React.createElement(
+		const parent = React.createElement(
 			"div",
-			{ id: "child" },
+			{ id: "parent" },
 			React.createElement(
-				"h1",
-				{},
-				"I am h1 tag"
+				"div",
+				{ id: "child" },
+				React.createElement(
+					"h1",
+					{},
+					"I am h1 tag"
+				)
 			)
-		)
-	);
+		);
 
 	If we do console.log(parent), we will se the object returned to be something like this:
-	{
-		type: "div",
-		props: {
-			id: "parent",
-			children: {
-				type: "div"
-				props: {
-					id: "child",
-					children: {
-						type: "h1",
-						props: {
-							children: "I am h1 tag"
+		{
+			type: "div",
+			props: {
+				id: "parent",
+				children: {
+					type: "div"
+					props: {
+						id: "child",
+						children: {
+							type: "h1",
+							props: {
+								children: "I am h1 tag"
+							}
 						}
 					}
 				}
 			}
 		}
-	}
 
-	now we render the parent componet to the HTML dom:
-	root.rendet(parent); 
-	----------------------------------------------------------------------------------------------------------
+	Now we render the parent componet to the HTML DOM:
+	root.render(parent); 
+	-----------------------------------------------------------------------------------------------------------------
 	1. How do we create sibling html element with react like the following:
-	<div id="parent">
-		<div id="child">
-			<h1>I am an h1 tag</h1>
-			<h2>I am an h2 tag</h2>
+		<div id="parent">
+			<div id="child">
+				<h1>I am an h1 tag</h1>
+				<h2>I am an h2 tag</h2>
+			</div>
 		</div>
-	</div>
 
 	->
 	We can specify an array of elements, instead of a single element as the third argument to React.createElement():
+
 		React.createElement("tag", {/*attributes*/}, [ element1, element2 ]); 
 	
 	So, our solution wil be:
 
-	const parent = React.createElement(
-		"div",
-		{ id: "parent" },
-		React.createElement(
+		const parent = React.createElement(
 			"div",
-			{ id: "child" },
-			[
-				React.createElement("h1",	{},	"I am h1 tag"),
-				React.createElement("h2",	{},	"I am h2 tag"),
-			]
-		)
-	);
+			{ id: "parent" },
+			React.createElement(
+				"div",
+				{ id: "child" },
+				[
+					React.createElement("h1",	{},	"I am h1 tag"),
+					React.createElement("h2",	{},	"I am h2 tag"),
+				]
+			)
+		);
 
-	now we render the parent element like this:
+	Now we render the parent element like this:
 	root.render(parent);
 	
 	2. This will cause react to show some warning: "Each child in a list should have a unique 'key' prop.". We will ignore it for now.
 	3. If we do console.log(parent), we will se the object returned to be something like this:
-	{
-		type: "div",
-		props: {
-			id: "parent",
-			children: {
-				type: "div"
-				props: {
-					id: "child",
-					children: [
-						{
-							type: "h1",
-							props: {
-								children: "I am h1 tag"
+		{
+			type: "div",
+			props: {
+				id: "parent",
+				children: {
+					type: "div"
+					props: {
+						id: "child",
+						children: [
+							{
+								type: "h1",
+								props: {
+									children: "I am h1 tag"
+								}
+							},
+							{
+								type: "h2",
+								props: {
+									children: "I am h2 tag"
+								}
 							}
-						},
-						{
-							type: "h2",
-							props: {
-								children: "I am h2 tag"
-							}
-						}
-					]
+						]
+					}
 				}
 			}
 		}
-	}
 	------------------------------------------------------------------------------------------------------------------------------
 	1. How do we create more complex html structure with react like the following:
-	<div id="parent">
-		<div id="child1">
-			<h1>I am an h1 tag</h1>
-			<h2>I am an h2 tag</h2>
+		<div id="parent">
+			<div id="child1">
+				<h1>I am an h1 tag</h1>
+				<h2>I am an h2 tag</h2>
+			</div>
+			<div id="child2">
+				<h1>I am an h1 tag</h1>
+				<h2>I am an h2 tag</h2>
+			</div>
 		</div>
-		<div id="child2">
-			<h1>I am an h1 tag</h1>
-			<h2>I am an h2 tag</h2>
-		</div>
-	</div>
 
 	->
 
@@ -202,7 +216,7 @@ const parent = React.createElement(
   ]
 );
 
-2. We see how complicated the nesting becomes. JSX is used to make the clean code and maintainable
+2. We see how complicated the nesting becomes. JSX is used to make the code clean and maintainable
 -------------------------------------------------------------------------------------------------------
 1. If we already have some DOM node inside the root div, defined in the html:
 	<body>
