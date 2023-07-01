@@ -11,4 +11,10 @@
 React runs of multiple platforms or devices. For mobile, we have react native where the core react is the same but the second file is different. Similarly there are other options available for the second script for different usecases, but the core remains the same
 6. We can also use the second file by typing ReactDOM on the console
 7. Why is crossorigin is specified in the script tag?
--> The servers serving the HTML file and the react files are different, so by trying to access the react files (resources) in our HTML file, we are doing a cross-origin request to the CDN server. Browsers stop such request by default for security reasons, we have to use the keyword crossorigin to specify the browser that we trust the remote site and to allow crossorigin request. 
+-> The servers serving the HTML file and the react files are different, so by trying to access the react files (resources) in our HTML file, we are doing a cross-origin request to the CDN server. Browsers stop such request by default for security reasons, we have to use the keyword crossorigin to specify the browser that we trust the remote site and to allow crossorigin request.
+---------------------------------------------------------------------------------------------
+1. React needs a root where we can put elements
+2. We create elements using React.createElement("html tag", {}, "The content that goes into the tag");
+e.g., React.createElement("h1", {}, "Hello World from React!");
+
+3. Creating an element is the core job of react, so we use 'React' but creating the root and adding items to it is the part of dom manipulation, so we use 'ReactDOM' 
