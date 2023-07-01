@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Repo to keep track of learnings from 'Namaste React' course",
   "scripts": {
+    "build": "npx parcel build index.html",
+    "start": "npx parcel index.html",
     "test": "jest"
   },
   "repository": {

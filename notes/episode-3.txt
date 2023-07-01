@@ -1,0 +1,10 @@
+1. We can define a script to be run (the command 'npx parcel index.html') in package.json and use npm to run that script:
+
+  "scirpts": [
+    "start": "npx parcel index.html",
+    "build": "npx parcel build index.html"
+  ]
+
+  We can now use "npm start"/"npm run start" and "npm run build" to start a dev server with dev build and to create a prod build respectively
+  -----------------------------------------------------------------------------------------------------------------------------------------------------
+  1. When we go to an uknown npm based project and we don't know how to start the project, we can see the package.json file to find which script to run
