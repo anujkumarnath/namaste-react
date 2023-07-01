@@ -1,0 +1,14 @@
+1. Take notes
+2. Pause and try to redo what he does
+3. Maintain a github repo
+--------------------------------------------------
+1. We can use JS to push an element to the dom.
+2. We can use cdn links to include react in our project
+3. including the two scripts give us react in the browser
+4. We can write React in the console and see it's there
+5. Why there are two files?
+-> The first file is the core of react and the second one is to manipulate the DOM.
+React runs of multiple platforms or devices. For mobile, we have react native where the core react is the same but the second file is different. Similarly there are other options available for the second script for different usecases, but the core remains the same
+6. We can also use the second file by typing ReactDOM on the console
+7. Why is crossorigin is specified in the script tag?
+-> The servers serving the HTML file and the react files are different, so by trying to access the react files (resources) in our HTML file, we are doing a cross-origin request to the CDN server. Browsers stop such request by default for security reasons, we have to use the keyword crossorigin to specify the browser that we trust the remote site and to allow crossorigin request. 
