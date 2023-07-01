@@ -15,7 +15,12 @@ React runs of multiple platforms or devices. For mobile, we have react native wh
 ---------------------------------------------------------------------------------------------
 1. React needs a root where we can put elements
 2. We create elements using React.createElement("html tag", {}, "The content that goes into the tag");
-e.g., React.createElement("h1", {}, "Hello World from React!");
+	e.g., React.createElement("h1", {}, "Hello World from React!");
+
+{} - is the place where we give attiributes to our tags like if we need to add some id to the h1 tag, we will write:
+	React.createElement("h1", { id: "heading" }, "Hello World from React!");
+We can give other attirbute like xyz:
+	React.createElement("h1", { xyz: "abc" }, "Hello from React!");
 
 3. Creating an element is the core job of react, so we use 'React' but creating the root and adding items to it is the part of dom manipulation, so we use 'ReactDOM'
 ---------------------------------------------------------------------------------------------
@@ -23,3 +28,14 @@ e.g., React.createElement("h1", {}, "Hello World from React!");
 2. All frontend libraries like React are trying to optimize this operation and reduce the costly operations performed by the browser
 3. React has the philosophy that whatever you do in a web page, do it using JavaScript and so it provides helper functions to do so in a very performant way
 4. Till this point whatever HTML we have written is all that we need. From now on any operation we will do, like adding and HTML element, we will use React/JavaScript
+---------------------------------------------------------------------------------------------
+1. what does React.createElement() returns?
+-> Not an HTML element, it's an js object
+const heading = React.createElement("h1", { id: "heading", xyz: "abc" }, "Hello from React!");
+heading is an object that contains many fields like type, props, ref etc.
+	a. The first arugment to the React.createElement is the type
+	b. The second and thrid arguments become the part of the prop:
+		prop: { id: 'heading", xyz: 'abc', children: 'Hello from React!'}
+	Therefore, the prop is all the attributes passed to the element and the thing(3rd param) that goes inside the element, called children
+2. what does root.render(heading) do?
+-> The job of the root.render() function is to take the js object we just created, create the h1 tag that the browser understands and put that element inside the root - the root element we specified with the ReactDOM.createRoot() call
