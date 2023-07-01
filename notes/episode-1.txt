@@ -103,3 +103,63 @@ heading is an object that contains many fields like type, props, ref etc.
 
 	now we render the parent componet to the HTML dom:
 	root.rendet(parent); 
+	----------------------------------------------------------------------------------------------------------
+	1. How do we create sibling html element with react like the following:
+	<div id="parent">
+		<div id="child">
+			<h1>I am an h1 tag</h1>
+			<h2>I am an h2 tag</h2>
+		</div>
+	</div>
+
+	->
+	We can specify an array of elements, instead of a single element as the third argument to React.createElement():
+		React.createElement("tag", {/*attributes*/}, [ element1, element2 ]); 
+	
+	So, our solution wil be:
+
+	const parent = React.createElement(
+		"div",
+		{ id: "parent" },
+		React.createElement(
+			"div",
+			{ id: "child" },
+			[
+				React.createElement("h1",	{},	"I am h1 tag"),
+				React.createElement("h2",	{},	"I am h2 tag"),
+			]
+		)
+	);
+
+	now we render the parent element like this:
+	root.render(parent);
+	
+	2. This will cause react to show some warning: "Each child in a list should have a unique 'key' prop.". We will ignore it for now.
+	3. If we do console.log(parent), we will se the object returned to be something like this:
+	{
+		type: "div",
+		props: {
+			id: "parent",
+			children: {
+				type: "div"
+				props: {
+					id: "child",
+					children: [
+						{
+							type: "h1",
+							props: {
+								children: "I am h1 tag"
+							}
+						},
+						{
+							type: "h2",
+							props: {
+								children: "I am h2 tag"
+							}
+						}
+					]
+				}
+			}
+		}
+	}
+	------------------------------------------------------------------------------------------------------------------------------
