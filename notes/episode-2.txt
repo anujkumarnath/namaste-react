@@ -89,3 +89,16 @@
 1. It is not only react that makes your application fast, it's also the bundler and the optimization, minification and bundling it does to your code
 2. We can recreate node_modules, .parcel-cache and dist folder by running the same scripts in the production server, so we are not pushing these to git
 3. The dev server offered by parcel serves the file from the 'dist' directory and not the actual files we have written
+--------------------------------------------------------------------------------------------------------------------------------------------
+1. How to specify which browsers should your app be working on at-least?
+-> Parcel uses browserslist npm package to do that
+  (a) The more browsers we add, our codebase will be bigger to include code to add support for all these browsers.
+  (b) We can avoid some very old browsers
+
+We can specify which browsers we want to support by adding a key "browserslist" to package.json like this:
+  "browserslist:  [
+    "last 2 versions"
+  ]
+  It will make sure that our app runs on last 2 versions of any browser out there
+
+We can see how the language of defining the browserslist should be in the official browserslist docs and browserslist.dev
