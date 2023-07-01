@@ -1,0 +1,19 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "Repo to keep track of learnings from 'Namaste React' course",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anujkumarnath/namaste-react.git"
+  },
+  "author": "Anuj Kumar Nath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anujkumarnath/namaste-react/issues"
+  },
+  "homepage": "https://github.com/anujkumarnath/namaste-react#readme"
+}
