@@ -204,3 +204,14 @@ const parent = React.createElement(
 
 2. We see how complicated the nesting becomes. JSX is used to make the clean code and maintainable
 -------------------------------------------------------------------------------------------------------
+1. If we already have some DOM node inside the root div, defined in the html:
+	<body>
+		<div id="root">
+			<h1>I was already there</h1>
+		</div>	
+		<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+		<script src="./App.js"></script>
+	</body>
+
+React will replace that with what we tell it to render
