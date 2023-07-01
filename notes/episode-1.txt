@@ -17,4 +17,9 @@ React runs of multiple platforms or devices. For mobile, we have react native wh
 2. We create elements using React.createElement("html tag", {}, "The content that goes into the tag");
 e.g., React.createElement("h1", {}, "Hello World from React!");
 
-3. Creating an element is the core job of react, so we use 'React' but creating the root and adding items to it is the part of dom manipulation, so we use 'ReactDOM' 
+3. Creating an element is the core job of react, so we use 'React' but creating the root and adding items to it is the part of dom manipulation, so we use 'ReactDOM'
+---------------------------------------------------------------------------------------------
+1. Most resource intensive task for a browser to do is to manipulate DOM - putting some element inside dom, removing or updating them.
+2. All frontend libraries like React are trying to optimize this operation and reduce the costly operations performed by the browser
+3. React has the philosophy that whatever you do in a web page, do it using JavaScript and so it provides helper functions to do so in a very performant way
+4. Till this point whatever HTML we have written is all that we need. From now on any operation we will do, like adding and HTML element, we will use React/JavaScript
