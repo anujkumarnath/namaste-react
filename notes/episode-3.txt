@@ -63,3 +63,58 @@ Both of the syntax creats the exactly same object, the react element
           Hello
         <h1>
       );
+------------------------------------------------------------------------------------------------------------------------------------
+1. What is a react component?
+-> 
+2. There are two types of components:
+    (a) Class Based components - old way of writing components
+    (b) Functional components
+3. React Functional Component - just a JavaScript function which returns some JSX/react element:
+
+    const HeadingComponent = () => {
+      return <h1>React Functional Component</h1>;
+    }
+
+      OR
+
+    const HeadingComponent = () => <h1>React Functional Component</h1>;
+
+      OR
+
+    const HeadingComponent = () => (
+      <h1>React Functional Component</h1>
+    );
+
+4. Functional components should be starting with a uppercase letter, otherwise linter will throw an error.
+---------------------------------------------------------------------------------------------------------------------------------------
+1. Diffrence between React Element and a React Functional Component
+-> React Functional Component is a function that return a React Element which is an Object.
+
+2. We cannot put a funct component inside render and just render it:
+
+    root.render(HeadingComponent);
+
+  This code will not work, because it's not a React Element(Object). It's a function instead
+
+3. We have to call that Functional component HeadingComponent():
+
+    root.render(HeadingComponent())
+
+4. We can do this with JSX also:
+
+    root.render(<HeadingComponent />);
+
+5. What is component composition?
+-> Using muliple components to create a new component. We create a new component by nesting one component inside another:
+
+  Component Title:
+    const Title = () => <h1>Title</h1>;
+
+  Component Heading:
+    const Heading = () => (
+      <div>
+        <Title />
+      </div>
+    );
+
+This is called component composition
