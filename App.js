@@ -3,15 +3,40 @@ import ReactDOM from "react-dom/client";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// Title component
-const Title = () => <h1>Title</h1>;
+// React element
+const element = <h1>React element</h1>;
 
-// Heading component 
-// This is component composition: using other components to create a new component
+// Putting react element inside a component
+const Title = () => <div>{element}</div>;
+
 const HeadingComponent = () => (
   <div>
     <Title />
+    {Title()}
+    <Title></Title>
   </div>
 );
 
-root.render(<HeadingComponent />);
+// Eliminating the need for extra parent div
+const HeadingComponent2 = () => (
+  <React.Fragment>
+    <Title />
+    {Title()}
+    <Title></Title>
+  </React.Fragment>
+);
+
+// It's same as below  
+const HeadingComponent3 = () => (
+  <>
+    <Title />
+    {Title()}
+    <Title></Title>
+  </>
+);
+
+// We can also put React component inside react element
+const reactElement = <div>{<HeadingComponent3 />}</div>;
+
+
+root.render(reactElement);

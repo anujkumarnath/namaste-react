@@ -118,3 +118,130 @@ Both of the syntax creats the exactly same object, the react element
     );
 
 This is called component composition
+---------------------------------------------------------------------------------------------------------------------------
+1. If we use {} inside JSX, we can put any JavaScript code inside it:
+
+  function Component() {
+    const number = 1000;
+
+    return (
+      <div>
+        <h1>{number}</h1>
+        {100 + 200}
+        <p>{console.log("abc")}</p>
+      </div>
+    );
+  }
+
+2. How do we use our already defined react element inside JSX?
+->
+  // React element
+  const title = <h1>Title</h1>;
+
+  const Component = () => (
+    <div>
+      {title}
+    </div>
+  );
+
+  'title' is a normal JavaScript object, so we can put this inside {}, inside JSX
+
+3. How do we use React element inside another react element?
+->
+  // React element
+  const elem = <span>Hi</span>;
+
+  // React element
+  const title = <h1>{elem}Bruh</h1>;
+
+4. We can use a component inside an element also:
+    const HeadingComponent = () => (
+      <div>
+        <h1>Namaste React</h1>
+      </div>
+    );
+
+    const title = (
+      <div>
+        <HeadingComponent />
+      </div>
+    );
+
+    root.render(title);
+
+5. Cross-site scripting:
+-> Running some code in a browser sent from some other source.
+
+  What if the data we put inside {} in JSX is coming from some API?
+  We know that it can run any JavaScript inside it like console.log().
+  So, what if the api sends back some malicious JavaScript code and we put that inside {} in JSX?
+  Will it execute that malicious code?
+  The anwser is 'No'. 
+  This is because JSX sanitizes the code what we put inside the {}.
+  Read more about it and know in which step it is exactly done
+  May need correction in entire point 5
+----------------------------------------------------------------------------------------------------------
+1. We can write <Title /> and <Title></Title>. Both are the same thing
+2. We can also do the following:
+  const HeadingComponent = () => (
+    <div>
+      <h1>Hello</h1>
+      { Title() }
+      <Title />
+      <Title></Title>
+    </div>
+  );
+
+  because, React functional component is a function, at the end of the day
+  All the three style of writing Title component iniside JSX has the same effect
+-----------------------------------------------------------------------------------------------------------
+1. We can have only one root element in JSX.
+  If we have siblings, We can wrap them inside another div or another parent html element
+
+2. But we don't want an extra parent. What can we do?
+-> We can wrap the siblings inside <></> or <React.Fragment></React.Fragment>
+
+  const HeadingComponent = () => (
+    <div>Hello</div>
+    <div>Hi</div>
+  );
+
+  Will not work. We have to do the following:
+
+  const HeadingComponent = () => (
+    <div>
+      <div>Hello</div>
+      <div>Hi</div>
+    </div>
+  );
+
+  OR
+
+  const HeadingComponent = () => (
+    <React.Fragment>
+      <div>Hello</div>
+      <div>Hi</div>
+    </React.Fragment>
+  );
+
+  OR
+
+  const HeadingComponent = () => (
+    <>
+      <div>Hello</div>
+      <div>Hi</div>
+    </>
+  );
+
+3.The <React.Fragment></React.Fragment> and <></> are the same 
+
+4. The differences between using a parent div and <></> or <React.Fragment></React.Fragment> is that
+  using div will cause an extra parent dv element to be rendered in the DOM, but Fragment doesn't add any extra parent element
+
+5. React Fragment (<></>) acts as an empty tag
+6. React.Fragment is from React
+7. <></> is offered by JSX, which is same React.Fragment but it is offered to make our code to look cleaner
+------------------------------------------------------------------------------------------------------------------------------
+1. Can we have muliple ReactDOM.createRoot() calls?
+2. Can we have muliple root.render() calls?
+-> Find out anwsers
