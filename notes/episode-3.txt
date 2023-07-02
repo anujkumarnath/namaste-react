@@ -6,5 +6,60 @@
   ]
 
   We can now use "npm start"/"npm run start" and "npm run build" to start a dev server with dev build and to create a prod build respectively
-  -----------------------------------------------------------------------------------------------------------------------------------------------------
-  1. When we go to an uknown npm based project and we don't know how to start the project, we can see the package.json file to find which script to run
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1. When we go to an uknown npm based project and we don't know how to start the project, we can see the package.json file to find which script to run
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1. React.createElement() ===> React Element(an Object) ====render==> HTML Element
+2. We can create react elements using JSX:
+    
+    const heading = <h1 id="heading">This is a React element created with JSX</h1>;
+  
+  The code to the right of "=" is JSX. The above statement is equivalent to the following(using core react):
+
+    const heading = React.createElement("h1", { id: "heading" }, "This is a React element created with JSX");
+  
+Both of the syntax creats the exactly same object, the react element
+
+3. JSX is not HTML/XML inside JavaScript. It's an HTML-like/XML-like syntax used to write React elements easily
+4. JSX is just a syntax, it's not a part of React.
+5. JSX is created because the way of creating elements in core react is not developer friendly and takes lot of effort.
+6. JSX is not a valid pure JavaScript syntax
+7. Any piece of code that JS engine can understand is valid JavaScript. JS engine cannot understand JSX
+
+8. Then how we are able to write JSX in our code?
+-> This is because Parcel is doing the magic behind the scene. It is converting JSX to pure JavaScript
+9. The process of converting non-standard JS code to browser understandable JS code is called transpilation'
+10. Parcel handles transpilation for us.
+11. JSX is transpiled before it reaches the JS engine
+12. Pacel doesn't do it itself, it give this reponsibility to Babel
+13. The JSX code
+      <h1 id="heading">Hello</h1>
+      
+    is transpiled to
+      
+      React.createElement("h1", { id: "heading" }, "Hello");
+
+14. JSX ==transpilation[Babel]==> React.createElement() ===[React]==> React Element(an Object) ====render[ReactDOM]==> HTML Element
+15. Babel's job is not just to compile JSX to pure JS.
+  It can also transpiles newer JS syntax to an older one so that
+  older browsers which do not support modern JavaScript features are able to run our code
+16. We can prove that JSX is not HTML by the following differences:
+    (a) in html we use CSS classes with class HTML attirbute, but in JSX we have to use className
+    (b) We don't use '-' in JSX, we use camel case:
+        HTML: tab-index=0
+        JSX: tabIndex={0}
+    (c) Add more after reading about this and find the reason to have this differences
+------------------------------------------------------------------------------------------------------------------------------------
+1. It's required to wrap the JSX inside parenthesis for a multi-line JSX code:
+
+      const container = (
+        <div>
+          <h1>Hello</h1>
+        </div>
+      );
+      
+      const heading = (
+        <h1>
+          Hello
+        <h1>
+      );
