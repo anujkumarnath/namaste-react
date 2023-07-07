@@ -1,0 +1,46 @@
+We will start building our food ordering app.
+For this we need to plan.
+Having a big picture before starting to code is helpful to achieve what we want in the UI.
+
+We will start by planning the layout of our app. Our app will look something like this:
+  Header
+    - Logo
+    - Nav Items
+  Body
+    - Seacrch Bar
+    - Restaurant Container
+        - Restaurant Card
+  Footer
+    - Copyright
+    - Links
+    - Address
+    - Contacts
+--------------------------------------------------------------------------------------------
+Props:
+1. Short form for properties
+2. We pass properties to a component using props
+3. Like a Functional component is nothing but a normal JS function, props are like normal function arguments
+4. Passing a prop to a function is like passing an argument to a function
+5. We pass props to react like this:
+
+    <Component propertyName="propertyValue" /> for string values
+    <Component propertyName={propertyValue} /> for other JS code like number, object, variable 
+
+  where propertyName is a porp and propertyValue is the value we assign to the prop.
+
+  It is like calling the function as:
+    Component({ propertyName: "propertyValue" }); for string values
+    Component({ propertyName: propertyValue });   for JS code like number, object, variable 
+
+  The object that we passed to the Component function is the props
+6. We need to use {} to pass JS variables or numbers, because we need {} to write JS inside JSX
+7. When we have to pass in data to a component, we pass in as props
+8. Whatever props we pass to a react component, react will wrap all of them in an object and pass it to the component
+---------------------------------------------------------------------------------------------------------------------
+Config-driven UI:
+  where the UI is governed by some config that is received from the backend/api
+
+For example, the offer carousel in swiggy app will be different for different cities
+---------------------------------------------------------------------------------------------------------------------
+Unique key: 1:55
+Do not use indexes as keys
