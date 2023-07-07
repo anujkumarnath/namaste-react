@@ -1,5 +1,5 @@
 We will start building our food ordering app.
-For this we need to plan.
+For this, we need to plan.
 Having a big picture before starting to code is helpful to achieve what we want in the UI.
 
 We will start by planning the layout of our app. Our app will look something like this:
@@ -26,9 +26,9 @@ Props:
     <Component propertyName="propertyValue" /> for string values
     <Component propertyName={propertyValue} /> for other JS code like number, object, variable 
 
-  where propertyName is a porp and propertyValue is the value we assign to the prop.
+  where propertyName is a prop and propertyValue is the value we assign to the prop.
 
-  It is like calling the function as:
+  It is like calling the function:
     Component({ propertyName: "propertyValue" }); for string values
     Component({ propertyName: propertyValue });   for JS code like number, object, variable 
 
@@ -40,7 +40,54 @@ Props:
 Config-driven UI:
   where the UI is governed by some config that is received from the backend/api
 
-For example, the offer carousel in swiggy app will be different for different cities
+For example, the offer carousel in Swiggy app will be different for different cities
 ---------------------------------------------------------------------------------------------------------------------
-Unique key: 1:55
-Do not use indexes as keys
+Unique key warning:
+When we create a list of components using a loop, react shows a warning that each child in a list item must have a unique key?
+
+1. What is the unique key warning?
+-> This means each react element in a list should be able to be uniquely identified.
+  For example, if we are looping over an array of 'items' and creating react elements/components out of it like:
+    
+    items.map(item => <ListItem name={item.name} />);
+  
+  we need to pass a unique value to a field named 'key' as shown below:
+
+    items.map(item => <ListItem name={item.name} key={item.id} />);
+
+  The key should not change if the order of the items in the list changes
+  
+2. Why do we need one?
+-> React optimizes its render cycles using various methods, one of which is using keys.
+  In a render cycle, when react sees that there is no change in some component since the last render, it skips re-rendering it.
+
+  When we have a list of components generated dynamically from a list, react cannot be sure about the order of the components,
+  because the order may likely change next time, or we may have lesser or more items on the list, which in turn may change the order.
+  Because of that, it becomes unpredictable to react if some component requires re-render or not.
+  So, react, to avoid skipping any important update, re-renders the entire list of components,
+  even if nothing has changed, which is inefficient.
+
+  Specifying a key helps react to identify the component uniquely, even if the order of it has changed and
+  it can avoid re-rendering the list item if nothing has changed since its parent's last render.
+
+-> Though using the array index as a key suppresses the warning, but doesn't help react do what it's intended to do with the keys.
+  Yes, every element will have a unique key among themselves, but across re-renders,
+  if the order changes, the components will have different keys, which also defies the purpose, because,
+  if the keys keep changing for a component, it will be considered a different component.
+
+  This is because, if
+      component 0 had props key=0, num=0, name='a' in the parent's last render,
+      component 1 now has props key=1, num=1, name='b'
+      
+  Now they're having swapped keys - component0 having key=1, component1 having key=0
+  Suppose react remembered them as 'component with key=0' and 'component with key=1',
+  now react will identify (though wrongly) them with the key, but other props for both
+  'component with key=0' and 'component with key=1' has changed, and this will cause a re-render.
+
+
+  So, we need to make sure, that the unique key doesn't change for a component across re-renders of the parent,
+  so that change in other props is the only reason for a re-render.
+
+  But, if we are 100% sure that the index of the components will never change, we can use the index as a key.
+
+  Read more from react.dev and earlier doc (List and Keys), and 'index as a key is an anti-pattern' and make changes to the abovementioned statements if corrections are needed.
