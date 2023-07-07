@@ -1,0 +1,7 @@
+1. Everything we do with React can be done using HTML, CSS and JavaScript. Then how is react helpful to us?
+-> It makes us write less code and let us focus on the main business logic. It makes our coding experience fast and better.
+It gives us the superpower to write production-ready applications easily.
+
+Read react file structure from https://reactjs.org/docs/faq-structure
+----------------------------------------------------------------------------------------------------------------------------
+1. Whenever we have a hardcoded value or data structure, we will not keep it inside the component file 
