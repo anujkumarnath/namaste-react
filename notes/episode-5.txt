@@ -2,6 +2,18 @@
 -> It makes us write less code and let us focus on the main business logic. It makes our coding experience fast and better.
 It gives us the superpower to write production-ready applications easily.
 
+-> It would be nice if changing the data source, updates the UI automatically. React exactly provides us with this superpower
 Read react file structure from https://reactjs.org/docs/faq-structure
+
+-> In our example, we are rendering multiple <RestaurantCard/> components, one for each item in the restaurant array we defined.
+  But when on click of the button we filter out the restaurants and keep only the ones with a rating >= 4, the UI doesn't update.
+  This is because the rendering process is over, we have already iterated over the array items and generated the output, now changing
+  the array doesn't make any difference in UI.
+
+-> All the frontend libraries, including React are solving this problem and they help us update the UI when the data source changes.
+  And this is why we use something like react.
+
+-> In react we write code in a declarative way instead of imperatively specifying how and when the UI should update.
+-> We just declare the UI on each possible state and use react to handle the transition between the states.
 ----------------------------------------------------------------------------------------------------------------------------
 1. Whenever we have a hardcoded value or data structure, we will not keep it inside the component file 
